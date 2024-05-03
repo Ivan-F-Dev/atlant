@@ -14,14 +14,27 @@ function App() {
 		})
 	}, [])
 
+	//тестчу регистрацию
+	const [email,setEmail] = useState('')
+	const [password,setPassword] = useState('')
+	const testReg = () => {
+		API.auth.post('/registration',{email,password})
+	}
+	//тестчу регистрацию
+	
 	return (
 		<div className="App">
 			<Header />
 			{/* <AppRouter /> */}
 			<div> {data
-				? <div>{data.data.text}</div>
+				? <div style={{cursor:'pointer'}}>{data.data.text}</div>
 				: <div>null</div>
 			}</div>
+			<div style={{padding: '10px',border: '1px solid black', borderRadius: '5px'}}>
+				<input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
+				<input type="text" placeholder="password"  value={password} onChange={e => setPassword(e.target.value)}/>
+				<button onClick={testReg}>Отправить</button>
+			</div>
 			<Footer />
 		</div>
 	);

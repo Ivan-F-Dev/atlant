@@ -15,7 +15,7 @@ const start = () => {
         app.use(cookieParser())
         app.use('/api',router)
         // set port
-        const port = process.env.port || 5000
+        const port = process.env.port || 6000
         // set routes
         app.get('/', (request, response) => {
             response.send('Hello world!')

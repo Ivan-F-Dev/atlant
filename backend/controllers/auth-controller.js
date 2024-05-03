@@ -1,6 +1,12 @@
+import AuthService from "../service/auth-service.js";
+
 class AuthController {
     async registration(req, res, next) {
         try {
+            const {email,password} = req.body
+            const userData = await AuthService.registration(email,password)
+            res.cookie('refreshToken',userData.refresh, {maxAge: 5*60*1000,httpOnly: true})
+            return res.json(userData)
 
         } catch (e) {
             console.log('Auth.registration: ',e)
