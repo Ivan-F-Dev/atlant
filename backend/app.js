@@ -10,7 +10,11 @@ const start = () => {
     try {
         const app = express()
         // set middlewares
-        app.use(cors())
+        app.use(cors({
+            credentials: true,
+            origin: 'http://localhost:3000',
+            // optionsSuccessStatus: 200
+        }))
         app.use(express.json())
         app.use(cookieParser())
         app.use('/api',router)

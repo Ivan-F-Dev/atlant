@@ -5,15 +5,6 @@ import Header from './Components/Header/Header';
 import { API } from "./utils/api";
 
 function App() {
-
-	const [data, setData] = useState<any>(null)
-
-	useEffect(() => {
-		API.auth.get('/todo').then(res => {
-			setData(res)
-		})
-	}, [])
-
 	//тестчу регистрацию
 	const [email,setEmail] = useState('')
 	const [password,setPassword] = useState('')
@@ -21,6 +12,14 @@ function App() {
 		API.auth.post('/registration',{email,password})
 	}
 	//тестчу регистрацию
+
+	const [data, setData] = useState<any>(null)
+
+	useEffect(() => {
+		API.auth.get('/todo').then(res => {
+			setData(res)
+		})
+	}, [email])
 	
 	return (
 		<div className="App">

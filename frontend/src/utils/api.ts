@@ -2,7 +2,8 @@ import axios from "axios";
 
 export const API = {
 	auth: axios.create({
-		baseURL: process.env.REACT_APP_API || 'http://localhost:6000error'
+		baseURL: process.env.REACT_APP_API || 'http://localhost:6000error',
+		withCredentials: true
 	})
 }
 
