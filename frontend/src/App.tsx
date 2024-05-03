@@ -9,7 +9,7 @@ function App() {
 	const [data, setData] = useState<any>(null)
 
 	useEffect(() => {
-		API.v1.get('/todo').then(res => {
+		API.auth.get('/todo').then(res => {
 			setData(res)
 		})
 	}, [])
@@ -19,7 +19,7 @@ function App() {
 			<Header />
 			{/* <AppRouter /> */}
 			<div> {data
-				? <div>{data.data.url}</div>
+				? <div>{data.data.text}</div>
 				: <div>null</div>
 			}</div>
 			<Footer />

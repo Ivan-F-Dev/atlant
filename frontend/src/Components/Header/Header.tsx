@@ -22,7 +22,7 @@ const Header: FC = () => {
 						<a><img className={styles.profilePhoto} src={ProfilePhoto} alt="аватар" /></a>
 					</div>
 					<div className={styles.userInfo}>
-						<div className={styles.userName}>Владимир</div>
+						<div className={styles.userName}>Владимир Владимирович Путин</div>
 					</div>
 				</div>
 			</div>
