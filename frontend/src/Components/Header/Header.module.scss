@@ -1,0 +1,15 @@
+.header {
+	&Container {
+		display: flex;
+		justify-content: space-between;
+		.navigation {
+			.navItems {
+				display: flex;
+			}
+		}
+	}
+}
+.profilePhoto {
+	width: 30px;
+	height: 30px;
+}
