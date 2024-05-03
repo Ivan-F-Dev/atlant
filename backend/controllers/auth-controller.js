@@ -1,4 +1,4 @@
-class Auth {
+class AuthController {
     async registration(req, res, next) {
         try {
 
@@ -45,4 +45,4 @@ class Auth {
     }
 }
 
-export default new Auth()
+export default new AuthController()
