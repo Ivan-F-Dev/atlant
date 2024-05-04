@@ -2,9 +2,23 @@
 	&Container {
 		display: flex;
 		justify-content: space-between;
-		.navigation {
-			.navItems {
-				display: flex;
+		height: 80px;
+		padding: 10px;
+		.logo {
+		}
+		.search {
+			.searchInput {
+			}
+		}
+		.user {
+			display: flex;
+			.userAvatar {
+				.profilePhoto {
+				}
+			}
+			.userInfo {
+				.userName {
+				}
 			}
 		}
 	}

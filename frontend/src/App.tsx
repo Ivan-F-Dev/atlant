@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react';
 import AppRouter from './Components/AppRouter/AppRouter';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
+import Navbar from './Components/Navbar/Navbar';
+import { useAppDispatch, useAppSelector } from './Hooks/hooks';
+import { addCount, removeCount } from './Redux/CountReducer';
 import { API } from "./utils/api";
 
 function App() {
+	const { count } = useAppSelector(state => state.count)
+	const dispatch = useAppDispatch()
+
+
 	//тестчу регистрацию
-	const [email,setEmail] = useState('')
-	const [password,setPassword] = useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 	const testReg = () => {
-		API.auth.post('/registration',{email,password})
+		API.auth.post('/registration', { email, password })
 	}
 	//тестчу регистрацию
 
@@ -20,19 +27,28 @@ function App() {
 			setData(res)
 		})
 	}, [email])
-	
+
 	return (
 		<div className="App">
 			<Header />
+			<Navbar />
 			{/* <AppRouter /> */}
 			<div> {data
-				? <div style={{cursor:'pointer'}}>{data.data.text}</div>
+				? <div style={{ cursor: 'pointer' }}>{data.data.text}</div>
 				: <div>null</div>
 			}</div>
-			<div style={{padding: '10px',border: '1px solid black', borderRadius: '5px'}}>
-				<input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
-				<input type="text" placeholder="password"  value={password} onChange={e => setPassword(e.target.value)}/>
+			<div style={{ padding: '10px', border: '1px solid black', borderRadius: '5px' }}>
+				<input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
+				<input type="text" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
 				<button onClick={testReg}>Отправить</button>
+			</div>
+			<div style={{ marginTop: "15px" }}>
+				<div style={{ fontSize: "24px", color: "red" }}>{count}</div>
+				<div style={{ display: "flex", columnGap: "20px" }}>
+					<button style={{ width: "80px", height: "20px", }} onClick={() => dispatch(addCount(1))}>Прибавить</button>
+					<button style={{ width: "80px", height: "20px" }} onClick={() => dispatch(removeCount(1))}>Убавить</button>
+				</div>
+
 			</div>
 			<Footer />
 		</div>
