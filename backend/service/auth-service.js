@@ -23,7 +23,7 @@ class AuthService {
             link: activationLink,
             isActivated: false
         })
-        await MailService.sendActivationMail(email, activationLink)
+        await MailService.sendActivationMail(email, process.env.API_URL + '/api/activate/' + activationLink)
         const tokens = await TokenService.generateToken({id:newId,email,isActivated: false})
         TokenService.saveToken(newId,tokens.refresh)
         console.log('Добавлен пользователь',db)
