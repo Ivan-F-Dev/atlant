@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import router from "./router/router.js";
+import mailService from "./service/mail-service.js";
 
 dotenv.config()
 
@@ -13,11 +14,12 @@ const start = () => {
         app.use(cors({
             credentials: true,
             origin: 'http://localhost:3000',
-            // optionsSuccessStatus: 200
         }))
         app.use(express.json())
         app.use(cookieParser())
         app.use('/api',router)
+        // set mail
+        mailService.create()
         // set port
         const port = process.env.port || 6000
         // set routes
