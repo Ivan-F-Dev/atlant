@@ -5,10 +5,12 @@
 		height: 80px;
 		padding: 10px;
 		.logo {
+			color: var(--button-color);
+			font-weight: 700;
+			font-size: 28px;
 		}
 		.search {
-			.searchInput {
-			}
+			margin-left: 300px;
 		}
 		.user {
 			display: flex;
