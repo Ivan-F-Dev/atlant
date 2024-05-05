@@ -13,22 +13,15 @@ class TokenService {
         let userIndex
         let updatedUser
         //ищем пользователя
-        const user = db.users.find((user,index) => {
+        db.users = db.users.map((user) => {
             if (user.id === id) {
-                userIndex = index
-                return true
+                user.refresh = refresh
+                return user
             }
-            return false
+            return user
         })
-        //записываем пользователю его рефреш токен
-        if (userIndex && user) {
-            updatedUser = {
-                ...user,
-                refresh: refresh
-            }
-            db.users[userIndex] = updatedUser
-        }
-        console.log('saveToken: ',{id,refresh,user,updatedUser})
+
+        console.log('saveToken: ',{id,refresh,users: db.users})
     }
 }
 

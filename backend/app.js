@@ -4,6 +4,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import router from "./router/router.js";
 import mailService from "./service/mail-service.js";
+import errorMiddleware from "./middlewares/error-middleware.js";
 
 dotenv.config()
 
@@ -18,6 +19,7 @@ const start = () => {
         app.use(express.json())
         app.use(cookieParser())
         app.use('/api',router)
+        app.use(errorMiddleware)
         // set mail
         mailService.create()
         // set port

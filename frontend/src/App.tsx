@@ -18,6 +18,9 @@ function App() {
 	const testReg = () => {
 		API.auth.post('/registration', { email, password })
 	}
+	const testLog = () => {
+		API.auth.post('/login', { email, password })
+	}
 	//тестчу регистрацию
 
 	const [data, setData] = useState<any>(null)
@@ -26,7 +29,7 @@ function App() {
 		API.auth.get('/todo').then(res => {
 			setData(res)
 		})
-	}, [email])
+	}, [])
 
 	return (
 		<div className="App">
@@ -40,7 +43,8 @@ function App() {
 			<div style={{ padding: '10px', border: '1px solid black', borderRadius: '5px' }}>
 				<input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
 				<input type="text" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
-				<button onClick={testReg}>Отправить</button>
+				<button onClick={testReg}>Регистрация</button>
+				<button onClick={testLog}>Вход</button>
 			</div>
 			<div style={{ marginTop: "15px" }}>
 				<div style={{ fontSize: "24px", color: "red" }}>{count}</div>
