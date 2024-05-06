@@ -4,8 +4,8 @@ import db from "../db/db.js";
 class TokenService {
     async generateToken(payload) {
         console.log('generateToken: ', {payload,SA: process.env.JWT_SECRET_ACCESS,SR: process.env.JWT_SECRET_REFRESH})
-        const access = jwt.sign(payload,process.env.JWT_SECRET_ACCESS, {expiresIn: '1m'})
-        const refresh = jwt.sign(payload,process.env.JWT_SECRET_REFRESH, {expiresIn: '5m'})
+        const access = jwt.sign(payload,process.env.JWT_SECRET_ACCESS, {expiresIn: '30s'})
+        const refresh = jwt.sign(payload,process.env.JWT_SECRET_REFRESH, {expiresIn: '2m'})
         console.log('generateToken2: ', {access,refresh})
         return {access,refresh}
     }
@@ -22,6 +22,38 @@ class TokenService {
         })
 
         console.log('saveToken: ',{id,refresh,users: db.users})
+    }
+    async removeToken(refreshToken) {
+        let output
+        db.users = db.users.map(user => {
+            if (user.refresh === refreshToken) {
+                user.refresh = ''
+                output = user
+                return user
+            }
+            return user
+        })
+        return output
+    }
+    validateAccessToken(token) {
+        try {
+            const userData = jwt.verify(token, process.env.JWT_SECRET_ACCESS)
+            return userData
+        } catch (e) {
+            return null
+        }
+    }
+    validateRefreshToken(token) {
+        try {
+            const userData = jwt.verify(token, process.env.JWT_SECRET_REFRESH)
+            return userData
+        } catch (e) {
+            return null
+        }
+    }
+    findToken(refreshToken) {
+        const userData = db.users.find(user => user.refresh === refreshToken)
+        return userData
     }
 }
 

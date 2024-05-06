@@ -61,8 +61,33 @@ class AuthService {
         return {...tokens,...db.users.find(el => el.id === user.id)}
 
     }
-    logout(refreshToken) {
-
+    async logout(refreshToken) {
+        const token = TokenService.removeToken(refreshToken)
+        return token
+    }
+    async refresh(refreshToken) {
+        if (!refreshToken) {
+            throw ApiError.UnauthorizedError()
+        }
+        const userData = TokenService.validateRefreshToken(refreshToken)
+        const tokenFromDB = TokenService.findToken(refreshToken)
+        if (!userData || !tokenFromDB) {
+            throw ApiError.UnauthorizedError()
+        }
+        const user = db.users.find(user => user.id === userData.id)
+        console.log('refresh: ',{userData,tokenFromDB,user})
+        const tokens = await TokenService.generateToken({id:user.id,email: user.email,isActivated: user.isActivated})
+        TokenService.saveToken(user.id,tokens.refresh)
+        console.log('Рефреш выполнен',db)
+        return {...tokens,...db.users.find(el => el.id === user.id)}
+    }
+    checkAccess(refreshToken) {
+        const user = db.users.find(user => user.refresh === refreshToken)
+        if (!user) {
+            throw ApiError.UnauthorizedError()
+        }
+        console.log('checkAccess service: ', user)
+        return {status: 'Есть доступ',user,users: db.users}
     }
 }
 

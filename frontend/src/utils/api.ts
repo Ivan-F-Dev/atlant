@@ -7,6 +7,11 @@ export const API = {
 	})
 }
 
+API.auth.interceptors.request.use( (config) => {
+	config.headers.Authorization = `Bearer ${localStorage.token}`
+	return config
+})
+
 
 
 

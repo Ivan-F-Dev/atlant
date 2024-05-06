@@ -11,7 +11,7 @@ class AuthController {
             }
             const {email,password} = req.body
             const userData = await AuthService.registration(email,password)
-            res.cookie('refreshToken',userData.refresh, {maxAge: 6*60*60*1000,httpOnly: true})
+            res.cookie('refreshToken',userData.refresh, {maxAge: 2*60*1000,httpOnly: true})
             return res.json(userData)
 
         } catch (e) {
@@ -22,7 +22,7 @@ class AuthController {
         try {
             const {email,password} = req.body
             const userData = await AuthService.login(email,password)
-            res.cookie('refreshToken',userData.refresh, {maxAge: 6*60*60*1000,httpOnly: true})
+            res.cookie('refreshToken',userData.refresh, {maxAge: 2*60*1000,httpOnly: true})
             return res.json(userData)
         } catch (e) {
             next(e)
@@ -31,7 +31,8 @@ class AuthController {
     async logout(req, res, next) {
         try {
             const {refreshToken} = req.cookies
-            const  token = AuthService.logout(refreshToken)
+            const  token = await AuthService.logout(refreshToken)
+            console.log('logout ', refreshToken, token)
             res.clearCookie('refreshToken')
             res.json(token)
         } catch (e) {
@@ -49,16 +50,20 @@ class AuthController {
     }
     async refresh(req, res, next) {
         try {
-
+            const {refreshToken} = req.cookies
+            const userData = await AuthService.refresh(refreshToken)
+            res.cookie('refreshToken',userData.refresh, {maxAge: 6*60*60*1000,httpOnly: true})
+            return res.json(userData)
         } catch (e) {
             next(e)
         }
     }
-    async todo(req, res, next) {
+    async checkAccess(req, res, next) {
         try {
-            res.json({
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, expedita!'
-            })
+            const {refreshToken} = req.cookies
+            const check = AuthService.checkAccess(refreshToken)
+            console.log('checkAccess controller: ', check)
+            res.json(check)
         } catch (e) {
             next(e)
         }
