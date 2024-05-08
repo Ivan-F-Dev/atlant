@@ -4,6 +4,9 @@ export const API = {
 	auth: axios.create({
 		baseURL: process.env.REACT_APP_API || 'http://localhost:6000error',
 		withCredentials: true
+	}),
+	crypto: axios.create({
+		baseURL: 'https://api.coingecko.com/api/v3'
 	})
 }
 
