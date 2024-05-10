@@ -10,12 +10,13 @@
 		position: absolute;
 		right: 0;
 		background-color: pink;
-		width: 30%;
+		width: 15%;
 		height: 30%;
 		padding: 15px;
 		display: flex;
 		flex-direction: column;
 		transition: all 0.6s ease 0s;
+		border-bottom-left-radius: 25px;
 		// justify-content: center;
 		.settingsItems {
 			display: flex;

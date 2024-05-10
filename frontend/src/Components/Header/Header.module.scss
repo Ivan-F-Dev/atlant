@@ -1,8 +1,9 @@
 .header {
 	height: 80px;
+	border-bottom: 1px solid white;
 	&Container {
 		display: flex;
-		// justify-content: space-between;
+		align-items: center;
 		padding: 10px;
 		.logo {
 			color: var(--button-color);

@@ -4,7 +4,7 @@ import { ROUTES } from "../../utils/routes"
 
 const AppRouter: FC = () => {
 	return <Routes>
-		{/* <Route path={ROUTES.HOME} element={<Home />} /> */}
+		 {/*<Route path={ROUTES.HOME} element={<Home />} /> */}
 	</Routes>
 }
 

@@ -19,7 +19,6 @@ function App() {
 	return (
 		<div className="App">
 			<Header active={settings} setActive={() => setSettings(!settings)} />
-			<Navbar />
 			{/* <AppRouter /> */}
 			<Home />
 			<Footer />

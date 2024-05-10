@@ -6,6 +6,7 @@ import { ROUTES } from '../../utils/routes'
 import ProfilePhoto from '../../Assets/header/profilePhoto.jpg'
 import Input from '../Input/Input';
 import settingsButton from '../../Assets/header/settingsIcon.svg'
+import Navbar from "../Navbar/Navbar";
 
 interface HeaderProps {
 	active: boolean;
@@ -13,20 +14,19 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ active, setActive }) => {
-	const [search, setSearch] = useState<string>('')
-
-	const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-		setSearch(e.target.value)
-	}
-	console.log(search);
-
+	// const [search, setSearch] = useState<string>('')
+	//
+	// const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+	// 	setSearch(e.target.value)
+	// }
 
 	return <div className={styles.header}>
 		<div className={styles.headerContainer}>
 			<div className={styles.logo}>	<NavLink to={ROUTES.HOME}>Atlant Crypto</NavLink></div>
-			<div className={styles.search}>
-				<Input value={search} placeholder="Поиск..." onChange={handleChange} type="text" />
-			</div>
+			<Navbar/>
+			{/*<div className={styles.search}>*/}
+			{/*	<Input value={search} placeholder="Поиск..." onChange={handleChange} type="text" />*/}
+			{/*</div>*/}
 			<div className={styles.settingsButton} onClick={setActive}>
 				<svg className={styles.settingsIcon} fill="#32BEA6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="64px" height="64px">
 					<path d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z" />

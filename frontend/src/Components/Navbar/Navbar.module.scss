@@ -1,14 +1,10 @@
 .navigation {
-	width: 100%;
 	padding: 10px 20px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-bottom: 1px solid var(--primary-color);
-	border-top: 1px solid var(--primary-color);
 	height: 80px;
 	font-size: 1.5rem;
-	// position: fixed;
 	.navItems {
 		display: flex;
 		column-gap: 20px;
