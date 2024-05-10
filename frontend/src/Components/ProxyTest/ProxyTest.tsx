@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import s from './ProxyTest.module.scss'
 import {API} from "../../utils/api";
 import {addCount, removeCount} from "../../Redux/CountReducer";
-import {useAppDispatch, useAppSelector} from "../../Hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../Hooks/storeHooks";
+import {useGetHeight} from "../../Hooks/getHeightHook";
 
 type Props = {
 
 };
 export const ProxyTest = (props: Props) => {
+
+    const {ref, heightStyle} = useGetHeight()
 
     const { count } = useAppSelector(state => state.count)
     const dispatch = useAppDispatch()
@@ -42,8 +45,6 @@ export const ProxyTest = (props: Props) => {
             alert('Запрос на рефреш сломался')
         }
     }
-
-    const [data1, setData1] = useState<any>(null)
 
     //
 
@@ -85,10 +86,7 @@ export const ProxyTest = (props: Props) => {
     }
 
     return (
-        <div className={s.ProxyTest}>
-            <div>
-                {data1 ? <div style={{ cursor: 'pointer' }}>{data1.data.text}</div> : <div>null</div>}
-            </div>
+        <div ref={ref} style={heightStyle} className={s.ProxyTest}>
             <div style={{ padding: '10px', border: '1px solid black', borderRadius: '5px' }}>
                 <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
                 <input type="text" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />

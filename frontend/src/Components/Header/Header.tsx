@@ -4,7 +4,7 @@ import styles from "./Header.module.scss"
 import { NavLink } from "react-router-dom"
 import { ROUTES } from '../../utils/routes'
 import ProfilePhoto from '../../Assets/header/profilePhoto.jpg'
-import Input from '../Input/Input';
+import Input from '../UI/Input/Input';
 import settingsButton from '../../Assets/header/settingsIcon.svg'
 import Navbar from "../Navbar/Navbar";
 
