@@ -1,0 +1,15 @@
+.Home {
+  & .Head {
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
+  & .Table {
+    height: calc(100% - 40px);
+    max-height: calc(100% - 40px);
+    overflow-y: overlay;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+}

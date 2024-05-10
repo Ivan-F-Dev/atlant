@@ -2,13 +2,16 @@ import {useEffect, useRef, useState} from "react";
 
 /**
  * У элемента не должно быть вертикальных margin!
+ * => {
+ *    ref: HTMLDivElement,
+ *    heightStyle: {height: string}
+ * }
  */
 export const useGetHeight = () => {
     const [height, setHeight] = useState<number>(0)
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect( () => {
-        console.log('REF', {ref, next: ref?.current?.nextSibling, prev: ref?.current?.previousSibling})
         if (ref.current) {
             const prev = ref.current.previousSibling as HTMLDivElement
             const next = ref.current.nextSibling as HTMLDivElement

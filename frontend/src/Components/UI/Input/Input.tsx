@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FC } from 'react'
-import styles from "./Intup.module.scss"
+import s from "./Intup.module.scss"
 
 interface InputProps {
 	value: string;
@@ -9,7 +9,7 @@ interface InputProps {
 }
 
 const Input: FC<InputProps> = ({ value, placeholder, onChange, type }) => {
-	return <input value={value} placeholder={placeholder} className={styles.searchInput} type={type} onChange={onChange} />
+	return <input value={value} placeholder={placeholder} className={s.searchInput} type={type} onChange={onChange} />
 
 }
 
