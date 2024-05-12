@@ -1,9 +1,10 @@
 .HomeCard {
   height: 60px;
-  padding: 5px;
+  padding: 5px 10px;
+  min-width: 100px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   background-color: var(--button-color);
   border-radius: 10px;
 }

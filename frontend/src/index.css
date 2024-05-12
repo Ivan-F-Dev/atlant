@@ -54,3 +54,16 @@ body {
 	max-height: 100vh;
 	overflow: hidden;
 }
+
+.v-scroll::-webkit-scrollbar {
+	width: 5px;
+}
+.v-scroll::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	color: var(--button-color);
+	background-color: var(--button-color);
+}
+
+.h-scroll {
+
+}

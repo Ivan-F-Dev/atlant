@@ -14,8 +14,8 @@ export const useGetHeight = () => {
     useEffect( () => {
         if (ref.current) {
             const prev = ref.current.previousSibling as HTMLDivElement
-            const next = ref.current.nextSibling as HTMLDivElement
-            setHeight(next.offsetHeight + prev.offsetHeight)
+            // const next = ref.current.nextSibling as HTMLDivElement
+            setHeight(prev.offsetHeight)//next.offsetHeight +
         }
     }, [])
 

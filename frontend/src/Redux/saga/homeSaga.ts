@@ -4,14 +4,20 @@ import {API} from "../../utils/api";
 
 const fetchHomeCards = () => API.auth.post('/get-proxy', {url: 'https://api.coingecko.com/api/v3'+'/coins/list'})
 
-export function* fetchHomeCardsWorker() {
+function* fetchHomeCardsWorker() {
+    console.log('fetchHomeCardsWorker')
     // @ts-ignore
     const res = yield call(fetchHomeCards)
-    console.log('fetchHomeCardsWorker')
-    yield put(setCards(res.data.proxyData))
+    console.log('fetchHomeCardsWorker',res)
+    if (res.status === 200) {
+        yield put(setCards(res.data.proxyData))
+    } else if (res.status === 401) {
+        alert('fetchHomeCardsWorker пришел 401 статус')
+    }
+
 }
 
 export function* HomeWatcher() {
-    console.log('HomeWatcher')
-    yield takeEvery(homeStart.type, fetchHomeCardsWorker)
+    console.log('run HomeWatcher')
+    yield takeEvery(homeStart, fetchHomeCardsWorker)
 }

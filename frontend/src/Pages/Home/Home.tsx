@@ -1,30 +1,29 @@
-import {FC, useEffect, useRef, useState} from 'react'
+import {FC, useEffect} from 'react'
 import {useAppDispatch, useAppSelector} from "../../Hooks/storeHooks";
 import {homeStart, setCards} from "../../Redux/HomeReducer";
 import {useGetHeight} from "../../Hooks/getHeightHook";
 import s from './Home.module.scss'
-import {HomeCard} from "../../Components/HomeCard/HomeCard";
+import {HomeTableHead} from "./components/HomeTableHead/HomeTableHead";
+import {HomeTable} from "./components/HomeTable/HomeTable";
 
 const Home: FC = () => {
 
 	const {ref, heightStyle} = useGetHeight()
 	const dispatch = useAppDispatch()
 	const {cards} = useAppSelector( (state) => state.home )
-	// useEffect( () => {
-	// 	dispatch(setCards([{name: '1',id: '1'},{name: '2',id: '2'}]))
-	// },[])
+
+	useEffect( () => {
+
+		if (!cards) {
+			console.log('homeStart')
+			dispatch(homeStart())
+		}
+	},[])
 
 	return (
 		<div ref={ref} style={heightStyle} className={s.Home}>
-			<div onClick={ () => dispatch(homeStart()) } className={s.Head}>
-				request
-			</div>
-			<div className={s.Table}>
-				{cards && cards.length
-					? cards.map( card => <HomeCard key={card.id} id={card.id} name={card.name}/>)
-					: 'Нет монет ((('
-				}
-			</div>
+			<HomeTableHead/>
+			{cards && cards.length ? <HomeTable cards={cards.slice(0,100)}/> : 'Нет монет ((('}
 		</div>
 	)
 }

@@ -11,7 +11,7 @@ class AuthController {
             }
             const {email,password} = req.body
             const userData = await AuthService.registration(email,password)
-            res.cookie('refreshToken',userData.refresh, {maxAge: 2*60*1000,httpOnly: true})
+            res.cookie('refreshToken',userData.refresh, {maxAge: 15*60*1000,httpOnly: true})
             return res.json(userData)
 
         } catch (e) {
@@ -22,7 +22,7 @@ class AuthController {
         try {
             const {email,password} = req.body
             const userData = await AuthService.login(email,password)
-            res.cookie('refreshToken',userData.refresh, {maxAge: 2*60*1000,httpOnly: true})
+            res.cookie('refreshToken',userData.refresh, {maxAge: 15*60*1000,httpOnly: true})
             return res.json(userData)
         } catch (e) {
             next(e)
@@ -52,7 +52,7 @@ class AuthController {
         try {
             const {refreshToken} = req.cookies
             const userData = await AuthService.refresh(refreshToken)
-            res.cookie('refreshToken',userData.refresh, {maxAge: 6*60*60*1000,httpOnly: true})
+            res.cookie('refreshToken',userData.refresh, {maxAge: 15*60*1000,httpOnly: true})
             return res.json(userData)
         } catch (e) {
             next(e)

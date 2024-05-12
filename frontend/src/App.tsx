@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Pages/Home/Home';
 import Input from './Components/UI/Input/Input';
@@ -22,7 +21,6 @@ function App() {
 				<Route path={ROUTES.HOME} element={<Home />} />
 				<Route path={ROUTES.TEST} element={<ProxyTest />} />
 			</Routes>
-			<Footer />
 			{/*Modals*/}
 			<SettingsWindow active={settings} setActive={() => setSettings(false)} setModal={() => setModal(true)} />
 			<Modal modal={modal} setModal={() => setModal(false)} >

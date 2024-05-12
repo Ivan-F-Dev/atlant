@@ -1,9 +1,9 @@
-import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga"
 import countSlice from "./CountReducer"
 import homeSlice from "./HomeReducer"
-import {HomeWatcher} from "./saga/homeSaga";
+import {rootWatcher} from "./saga/rootSaga";
 
 const sagaMiddleware = createSagaMiddleware()
 // const middleware = [sagaMiddleware]
@@ -20,7 +20,7 @@ export const setupStore = () => {
 			return getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware)
 		}
 	})
-	sagaMiddleware.run(HomeWatcher)
+	sagaMiddleware.run(rootWatcher)
 	return store
 }
 
