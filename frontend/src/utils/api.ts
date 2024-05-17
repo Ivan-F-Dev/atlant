@@ -14,6 +14,12 @@ API.auth.interceptors.request.use( (config) => {
 	config.headers.Authorization = `Bearer ${localStorage.token}`
 	return config
 })
+API.auth.interceptors.response.use( (config) => {
+	// if (config.status === 401) {
+		console.log('API.auth.interceptors.response',config)
+	// }
+	return config
+})
 
 
 
